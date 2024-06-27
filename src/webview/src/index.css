@@ -1,0 +1,219 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --green: lch(23, 173, 165);
+  --blue: lch(23, 173, 249);
+  --purple: lch(22, 123, 672);
+  --yellow: lch(83, 67.81, 81.35);
+}
+* {
+  box-sizing: border-box;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+/* 
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+.base-node {
+  padding: 10px;
+  --radius: 8px;
+  border-radius: var(--radius);
+  --node-bg: var(--purple);
+  background: var(--node-bg);
+  --node-text: white;
+  color: var(--node-text);
+  min-height: 50px;
+  --node-w: 140px;
+  width: var(--node-w);
+  font-weight: 500;
+
+  --label-h: 24px;
+  --label-mb: 8px;
+  --prop-h: 12px;
+  --prop-py: 8px;
+  height: calc(
+    var(--label-h) + var(--label-mb) + (var(--prop-h)) *
+      (var(--max-props-count)) + (var(--prop-py)) * (var(--max-props-count) - 1) +
+      8px
+  );
+}
+
+.react-flow__node-component .base-node {
+  --node-bg: var(--blue);
+}
+
+.base-node > label {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.15);
+  background-blend-mode: darken;
+  height: var(--label-h);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: var(--radius) var(--radius) 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.base-node ul {
+  margin: 0;
+  padding: 0;
+}
+
+.prop {
+  width: 50%;
+  height: var(--prop-h);
+  position: absolute;
+  padding: 0;
+  list-style: none;
+}
+.prop.input {
+  left: 0;
+}
+.prop.output {
+  right: 0;
+}
+.prop:nth-child(1) {
+  top: calc(
+    var(--label-h) + var(--label-mb) + (var(--prop-h) + var(--prop-py)) * 0
+  );
+}
+.prop:nth-child(2) {
+  top: calc(
+    var(--label-h) + var(--label-mb) + (var(--prop-h) + var(--prop-py)) * 1
+  );
+}
+.prop:nth-child(3) {
+  top: calc(
+    var(--label-h) + var(--label-mb) + (var(--prop-h) + var(--prop-py)) * 2
+  );
+}
+.prop:nth-child(4) {
+  top: calc(
+    var(--label-h) + var(--label-mb) + (var(--prop-h) + var(--prop-py)) * 3
+  );
+}
+.prop:nth-child(5) {
+  top: calc(
+    var(--label-h) + var(--label-mb) + (var(--prop-h) + var(--prop-py)) * 4
+  );
+}
+.prop .react-flow__handle {
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+}
+.react-flow__handle label {
+  position: absolute;
+  /* text-overflow: ellipsis; */
+  white-space: nowrap;
+  /* overflow: hidden; */
+  max-width: calc(var(--node-w) / 2 - 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.8;
+  height: var(--label-h);
+  display: flex;
+  align-items: center;
+}
+
+.base-node .react-flow__handle-right {
+  right: 6px;
+}
+.base-node .react-flow__handle-left {
+  left: 6px;
+}
+
+.react-flow__handle-right label {
+  right: 100%;
+  margin-right: 6px;
+}
+.react-flow__handle-left label {
+  left: 100%;
+  margin-left: 6px;
+}
+
+/* Noodles */
+.react-flow .react-flow__edges {
+  z-index: 1 !important;
+}
+.react-flow__edge .react-flow__edge-path {
+  stroke: var(--yellow);
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+
+.edge-cap {
+  fill: var(--yellow);
+  top: var(--x);
+  left: var(--x);
+}
+
+.edge-cap.start {
+  transform: translateX(-4px);
+}
+.edge-cap.end {
+  transform: translateX(4px);
+}
